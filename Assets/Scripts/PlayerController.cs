@@ -8,17 +8,17 @@ public class PlayerController : MonoBehaviour
 
     bool isGrounded = false;
 
-    Vector3 moveVector; 
+    Vector3 moveVector;
 
-	void Start ()
+    void Start()
     {
         player = gameObject;
         moveVector = new Vector3(moveSpeed, 0, 0);
     }
-	
-	void Update ()
+
+    void Update()
     {
-        if(Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
             player.GetComponent<Transform>().position = player.GetComponent<Transform>().position + moveVector / 20;
 
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -31,9 +31,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D (Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if(other.name == "platform")
+        if (other.name == "platform")
             isGrounded = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
